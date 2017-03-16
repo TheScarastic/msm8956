@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.10.84 Kernel Configuration
+# Linux/arm64 3.10.84-Dominator™ Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -1931,7 +1931,7 @@ CONFIG_POWER_SUPPLY=y
 # CONFIG_QPNP_CHARGER is not set
 CONFIG_QPNP_SMBCHARGER=y
 # CONFIG_TEMP_CHARGE_DISABLE is not set
-# CONFIG_BOARDTEMP_WORK is not set
+CONFIG_BOARDTEMP_WORK=y
 CONFIG_QPNP_FG=y
 CONFIG_BATTERY_BCL=y
 # CONFIG_CHARGER_SMB347 is not set
