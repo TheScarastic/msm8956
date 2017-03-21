@@ -35,36 +35,15 @@ toolchain ()
 {
 clear
 echo -e " Select which toolchain you want to build with?$white"
-echo -e " 1.UBERTC 4.9 AARCH64$white"
-echo -e " 2.SABERMOD 4.9 AARCH64"
-echo -e " 3.UBERTC 5.3 AARCH64"
-echo -e " 4.SABERMOD 5.3 AARCH64"
+echo -e " 1.LINARO 6.3.1 Toolchain"
 echo -n " Enter your choice:"
 read choice
 case $choice in
 1) export CROSS_COMPILE=$TOOLCHAIN_DIR/aarch64-linux-android-4.9-UBERTC/bin/aarch64-linux-android-
    export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/aarch64-linux-android-4.9-UBERTC/lib/
    STRIP=$TOOLCHAIN_DIR/aarch64-linux-android-4.9-UBERTC/bin/aarch64-linux-android-strip
-   echo -e " You selected UBERTC"
-   TC="UB"
-   ;;
-2) export CROSS_COMPILE=$TOOLCHAIN_DIR/aarch64-linux-gnu-4.9/bin/aarch64-
-   export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/aarch64-linux-gnu-4.9/lib/
-   STRIP=$TOOLCHAIN_DIR/aarch64-linux-gnu-4.9/bin/aarch64-strip
-   echo -e " You selected SABERMOD"
-   TC="SM"
-   ;;
-3) export CROSS_COMPILE=$TOOLCHAIN_DIR/aarch64-linux-android-5.3-kernel/bin/aarch64-linux-android-
-   export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/aarch64-linux-android-5.3-kernel/lib/
-   STRIP=$TOOLCHAIN_DIR/aarch64-linux-android-5.3-kernel/bin/aarch64-linux-android-strip
-   echo -e " You selected UBERTC 5.3"
-   TC="UB"
-   ;;
-4) export CROSS_COMPILE=$TOOLCHAIN_DIR/aarch64-linux-gnu-5.3/bin/aarch64-
-   export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/aarch64-linux-gnu-5.3/lib/
-   STRIP=$TOOLCHAIN_DIR/aarch64-linux-gnu-5.3/bin/aarch64-strip
-   echo -e " You selected SABERMOD"
-   TC="SM"
+   echo -e " You selected LINAROTC"
+   TC="LINARO"
    ;;
 *) toolchain ;;
 esac
@@ -74,25 +53,25 @@ toolchain
 # vars
 export ARCH=arm64
 export SUBARCH=arm64
-export KBUILD_BUILD_USER="Abhishek"
-export KBUILD_BUILD_HOST="DominatingMachine"
+export KBUILD_BUILD_USER="MurdererFight"
+export KBUILD_BUILD_HOST"Xubuntu16.10"
 
-#Dominator Kernel Details
-BASE_VER="Dominator"
-VER="-v2.5-$(date +"%Y-%m-%d"-%H%M)-"
+#Adamanteous Kernel Details
+BASE_VER="Adamanteous"
+VER="-v0-$(date +"%Y-%m-%d"-%H%M)-"
 Dominator_VER="$BASE_VER$VER$TC"
 
 compile_kernel ()
 {
 echo -e "**********************************************************************************************"
 echo "                                                                                                 "
-echo "                                        Compiling Dominator Kernel                               "
+echo "                                        Compiling Adamanteous Kernel                               "
 echo "                                                                                                 "
 echo -e "**********************************************************************************************"
 make kenzo_defconfig
-make Image -j8
-make dtbs -j8
-make modules -j8
+make Image -j4
+make dtbs -j4
+make modules -j4
 if ! [ -a $KERN_IMG ];
 then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
@@ -115,7 +94,7 @@ cd $KERNEL_DIR
 
 case $1 in
 clean)
-make ARCH=arm64 -j8 clean mrproper
+make ARCH=arm64 -j4 clean mrproper
 rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
 ;;
 *)
@@ -123,7 +102,7 @@ compile_kernel
 ;;
 esac
 
-rm -rf $OUT_DIR/Dominator*.zip
+rm -rf $OUT_DIR/Adamanteous*.zip
 rm -rf $OUT_DIR/Kernel*.zip
 rm -rf $MODULES_DIR*.zip
 rm -rf $OUT_DIR/zImage
@@ -132,7 +111,7 @@ rm -rf $ZIP_MOVE/*
 cp $KERNEL_DIR/arch/arm64/boot/Image  $OUT_DIR/zImage
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $OUT_DIR/dtb
 cd $OUT_DIR
-zip -r `echo $Dominator_VER`.zip *
+zip -r `echo $Adamanteous_VER`.zip *
 mv   *.zip $ZIP_MOVE
 cd $KERNEL_DIR
 BUILD_END=$(date +"%s")
@@ -140,11 +119,10 @@ DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
 echo -e "**********************************************************************************************"
 echo "                                                                                                 "
-echo "                                        Enjoy Dominator                                          "
-echo "                                      $Dominator_VER.zip                                         " 
+echo "                                        Enjoy Adamanteous                                          "
+echo "                                      $Adamanteous_VER.zip                                         " 
 echo "                                                                                                 "
 echo -e "**********************************************************************************************"  
 cd
 cd $ZIP_MOVE
 ls
-ftp uploads.androidfilehost.com
