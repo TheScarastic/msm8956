@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 10
 SUBLEVEL = 84
-EXTRAVERSION = -Dominator™
-NAME = TOSSUG Baby Fish
+EXTRAVERSION = -Adamanteous
+NAME = test
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
